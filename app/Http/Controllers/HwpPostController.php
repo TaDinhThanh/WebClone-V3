@@ -37,10 +37,9 @@ class HwpPostController extends Controller
             $tr_ja_fr = new GoogleTranslate('fr', 'ja');
             //france->viet
             $tr_fr_vi = new GoogleTranslate('vi', 'fr');
-            $body = json_decode($request->getContent());
-            for ($j = 0; $j < count($body); $j++) {
+            foreach ($request->data as $value) {
                 //dịch sang tiếng Anh
-                $desc = $body[$j]->url_description;
+                $desc = $value['url_description'];
                 $desc = $tr_vi_en->translate($desc);
                 //dịch sang tiếng nhật
                 $desc = $tr_en_ja->translate($desc);
@@ -53,13 +52,13 @@ class HwpPostController extends Controller
                 //     ->get()->toArray();
                 // if (count($url) == 0) {
                     HwpUrl::query()->insert([
-                        "url" => $body[$j]->url,
-                        "url_image" => $body[$j]->url_image,
-                        "url_title" => Addslashes($body[$j]->url_title),
+                        "url" => $value['url'],
+                        "url_image" => $value['url_image'],
+                        "url_title" => Addslashes($value['url_title']),
                         "url_description" => Addslashes($desc),
-                        "ky_hieu" => $body[$j]->ky_hieu,
-                        "id_key" => $body[$j]->id_key,
-                        "stt" => $body[$j]->stt
+                        "ky_hieu" => $value['ky_hieu'],
+                        "id_key" => $value['id_key'],
+                        "stt" => $value['stt']
                     ]);
                 // }    
             }
@@ -86,10 +85,9 @@ class HwpPostController extends Controller
             $tr_ja_fr = new GoogleTranslate('fr', 'ja');
             //france->viet
             $tr_fr_vi = new GoogleTranslate('vi', 'fr');
-            $body = json_decode($request->getContent());
-            for ($j = 0; $j < count($body); $j++) {
+            foreach ($request->data as $value) {
                 // dịch sang tiếng Anh
-                $desc = $body[$j]->url_description;
+                $desc = $value['url_description'];
                 $desc = $tr_vi_en->translate($desc);
                 //dịch sang tiếng nhật
                 $desc = $tr_en_ja->translate($desc);
@@ -97,17 +95,17 @@ class HwpPostController extends Controller
                 $desc = $tr_ja_fr->translate($desc);
                 //dịch sang tiếng việt
                 $desc = $tr_fr_vi->translate($desc);
-                // $url = HwpUrl::where('url', '=', $body[$j]->url)
-                //     ->where('id_key', '=', $body[$j]->id_key)
+                // $url = HwpUrl::where('url', '=', $value['url'])
+                //     ->where('id_key', '=', $value['id_key'])
                 //     ->get()->toArray();
                 // if (count($url) == 0) {
                     HwpUrl::query()->insert([
-                        "url" => $body[$j]->url,
-                        "url_title" => Addslashes($body[$j]->url_title),
+                        "url" => $value['url'],
+                        "url_title" => Addslashes($value['url_title']),
                         "url_description" => Addslashes($desc),
-                        "ky_hieu" => $body[$j]->ky_hieu,
-                        "id_key" => $body[$j]->id_key,
-                        "stt" => $body[$j]->stt
+                        "ky_hieu" => $value['ky_hieu'],
+                        "id_key" => $value['id_key'],
+                        "stt" => $value['stt']
                     ]);
                 // }
             }
@@ -135,10 +133,9 @@ class HwpPostController extends Controller
             $tr_ja_fr = new GoogleTranslate('fr', 'ja');
             //france->viet
             $tr_fr_vi = new GoogleTranslate('vi', 'fr');
-            $body = json_decode($request->getContent());
-            for ($j = 0; $j < count($body); $j++) {
+            foreach ($request->data as $value) {
                 //dịch sang tiếng Anh
-                $desc = $body[$j]->url_description;
+                $desc = $value["url_description"];
                 $desc = $tr_vi_en->translate($desc);
                 //dịch sang tiếng nhật
                 $desc = $tr_en_ja->translate($desc);
@@ -146,18 +143,18 @@ class HwpPostController extends Controller
                 $desc = $tr_ja_fr->translate($desc);
                 //dịch sang tiếng việt
                 $desc = $tr_fr_vi->translate($desc);
-                // $url = DB::table('hwp_urls')->where('url', '=', $body[$j]->url)
-                // ->where('id_key', '=', $body[$j]->id_key)
+                // $url = DB::table('hwp_urls')->where('url', '=', $value["url"])
+                // ->where('id_key', '=', $value["id_key"])
                 // ->get()->toArray();
                 // if(count($url) == 0) {
                 HwpUrl::query()->insert([
-                    "url" => $body[$j]->url,
-                    "url_image" => $body[$j]->url_image,
-                    "url_title" => Addslashes($body[$j]->url_title),
+                    "url" => $value["url"],
+                    "url_image" => $value["url_image"],
+                    "url_title" => Addslashes($value["url_title"]),
                     "url_description" => Addslashes($desc),
-                    "ky_hieu" => $body[$j]->ky_hieu,
-                    "id_key" => $body[$j]->id_key,
-                    "stt" => $body[$j]->stt
+                    "ky_hieu" => $value["ky_hieu"],
+                    "id_key" => $value["id_key"],
+                    "stt" => $value["stt"]
                 ]);
                 // }
 
