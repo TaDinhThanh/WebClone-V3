@@ -37,18 +37,25 @@ class HwpBlackListController extends Controller
      */
     public function saveBlackList(Request $request)
     {
-        foreach ($request->data as $value) {
-            if (HwpBlackList::where('domain', '=', $value['domain'])->count() == 0) {
-                HwpBlackList::create([
-                    "domain" => $value['domain'],
-                    "loai" => $value['loai'],
-                ]);
-            };
+        try {
+            foreach ($request->data as $value) {
+                if (HwpBlackList::where('domain', '=', $value['domain'])->count() == 0) {
+                    HwpBlackList::create([
+                        "domain" => $value['domain'],
+                        "loai" => $value['loai'],
+                    ]);
+                };
+            }
+            return [
+                'message' => 'Lưu thành công, đã lưu black domain vào cơ sở dữ liệu',
+                'textStatus' => "success"
+            ];
+        } catch (\Throwable $th) {
+            return [
+                'message' => 'Lưu thất bại',
+                'textStatus' => "success"
+            ];
         }
-        return [
-            'message' => 'Lưu thành công, đã lưu black domain vào cơ sở dữ liệu',
-            'textStatus' => "success"
-        ];
     }
 
     /**
@@ -59,19 +66,27 @@ class HwpBlackListController extends Controller
      */
     public function saveBlackListByIdCam(Request $request, $id_cam)
     {
-        foreach ($request->data as $value) {
-            if (HwpBlackList::where('domain', '=', $value['domain'])->where('id_cam', '=', $id_cam)->count() == 0) {
-                HwpBlackList::create([
-                    "domain" => $value['domain'],
-                    "loai" => $value['loai'],
-                    'id_cam' => $id_cam
-                ]);
-            };
+
+        try {
+            foreach ($request->data as $value) {
+                if (HwpBlackList::where('domain', '=', $value['domain'])->where('id_cam', '=', $id_cam)->count() == 0) {
+                    HwpBlackList::create([
+                        "domain" => $value['domain'],
+                        "loai" => $value['loai'],
+                        'id_cam' => $id_cam
+                    ]);
+                };
+            }
+            return [
+                'message' => 'Lưu thành công, đã lưu black domain vào cơ sở dữ liệu',
+                'textStatus' => "success"
+            ];
+        } catch (\Throwable $th) {
+            return [
+                'message' => 'Lưu thất bại',
+                'textStatus' => "success"
+            ];
         }
-        return [
-            'message' => 'Lưu thành công, đã lưu black domain vào cơ sở dữ liệu',
-            'textStatus' => "success"
-        ];
     }
 
     /**

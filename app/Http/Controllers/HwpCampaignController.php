@@ -32,7 +32,6 @@ class HwpCampaignController extends Controller
                     HwpCampaign::create([
                         "campaign" => $value['campaign'],
                         "language" => $value['language'],
-                        "check" => false
                     ]);
                 };
             }
